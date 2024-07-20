@@ -2,9 +2,9 @@ function AddTodoForm(props) {
 
     const handleAddTodo = (e) => {
         e.preventDefault();
-        console.log(e);
         let todoTitle = e.target.title.value;
         console.log("todoTitle", todoTitle);
+        e.target.reset();
         props.onAddTodo(todoTitle);
     }
 
