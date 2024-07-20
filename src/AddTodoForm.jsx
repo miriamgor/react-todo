@@ -1,9 +1,23 @@
-function AddTodoForm() {
+function AddTodoForm(props) {
+
+    const handleAddTodo = (e) => {
+        e.preventDefault();
+        console.log(e);
+        let todoTitle = e.target.title.value;
+        console.log("todoTitle", todoTitle);
+        props.onAddTodo(todoTitle);
+    }
+
+    const handleClick = () => {
+        props.onAddTodo("");
+
+    }
+
     return (
-        <form>
+        <form onSubmit={handleAddTodo}>
             <label htmlFor="todoTitle">Title</label>
-            <input id="todoTitle" />
-            <button>Add</button>
+            <input name="title" id="todoTitle"  />
+            <button onClick={handleClick}>Add</button>
         </form>
     );
 }
