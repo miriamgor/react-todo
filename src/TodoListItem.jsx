@@ -1,7 +1,5 @@
-const TodoListItem = (props) => {
-    return (
-        <li>{props.todo.title}</li>
-    )
-}
+const TodoListItem = ({ todo }) => {
+  return <li>{todo.title}</li>;
+};
 
 export default TodoListItem;
