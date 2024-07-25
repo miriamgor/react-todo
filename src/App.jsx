@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 const useSemiPersistentState = () => {
   const [todoList, setTodoList] = useState(
-    JSON.parse(localStorage.getItem("savedTodoList"))
+    JSON.parse(localStorage.getItem("savedTodoList")) || []
   );
 
   useEffect(() => {
