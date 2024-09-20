@@ -1,7 +1,9 @@
 import "./App.css";
+import React, { Fragment } from "react";
 import TodoList from "./TodoList";
 import AddTodoForm from "./AddTodoForm";
 import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 const url = `https://api.airtable.com/v0/${
   import.meta.env.VITE_AIRTABLE_BASE_ID
@@ -59,16 +61,23 @@ function App() {
   };
 
   return (
-    <div>
-      <h1>Todo List</h1>
-      <AddTodoForm onAddTodo={addTodo} />
-      {isLoading ? (
-        <p>"Loading"</p>
-      ) : (
-        <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
-      )}
-      <hr />
-    </div>
+    <Router>
+      <Routes>
+        <Route path="/"></Route>
+        <Route path="/new" element={<h1>New Todo List</h1>}>
+        </Route>
+      </Routes>
+      <div>
+        <h1>Todo List</h1>
+        <AddTodoForm onAddTodo={addTodo} />
+        {isLoading ? (
+          <p>"Loading"</p>
+        ) : (
+          <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
+        )}
+        <hr />
+      </div>
+    </Router>
   );
 }
 
