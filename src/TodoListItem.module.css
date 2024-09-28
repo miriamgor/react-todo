@@ -1,0 +1,23 @@
+.ListItem {
+  color: #55585e;
+  display: flex;
+}
+.listItemDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.removeButton {
+  color: #e1e8f0;
+  border-color: #6ed3cf;
+  margin: 1em 1.5em 1em 0;
+  border-style: solid;
+  border: none;
+}
+.todoItem {
+  padding-top: 1em;
+  margin-right: 1em;
+  width: 14em;
+  overflow-wrap: break-word;
+  text-align: left;
+}
