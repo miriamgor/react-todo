@@ -1,4 +1,5 @@
 import { useEffect, useRef } from "react";
+import PropTypes from "prop-types";
 
 const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
   const inputRef = useRef();
@@ -6,6 +7,9 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
   useEffect(() => {
     inputRef.current.focus();
   });
+console.log('children', children);
+console.log('typeof', typeof(children));
+console.log('todotitle', todoTitle);
 
   return (
     <>
@@ -22,5 +26,13 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
     </>
   );
 };
+
+InputWithLabel.propTypes = {
+todoTitle: PropTypes.string,
+handleTitleChange: PropTypes.func.isRequired,
+// children: PropTypes.oneOfType([PropTypes.string])
+children: PropTypes.string
+// children: PropTypes.node.isRequired
+}
 
 export default InputWithLabel;
