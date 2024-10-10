@@ -1,0 +1,28 @@
+.addTodoButton {
+  color: #6ed3cf;
+  padding-left: 2em;
+  padding-right: 2em;
+  border: none;
+}
+
+input {
+  font-weight: 800;
+  padding-left: 0.7em;
+  margin-right: 1.3em;
+  border-radius: 8em;
+  border-color: #55585e;
+  border-style: solid;
+  color: #e1e8f0;
+  background-color: #9068be;
+  height: 2em;
+}
+
+label[for="todoTitle"] {
+  color: #55585e;
+}
+
+.formDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
