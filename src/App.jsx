@@ -22,12 +22,17 @@ function App() {
     setTodoList([...todoList, newTodo]);
   };
 
+  const onRemoveTodo = (id) => {
+    const newArray = todoList.filter((item) => item.id !== id);
+    setTodoList(newArray);
+  }
+
   return (
     <div>
       <h1>Todo List</h1>
       <AddTodoForm onAddTodo={addTodo} />
       <p></p>
-      <TodoList todoList={todoList} />
+      <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
       <hr />
     </div>
   );
