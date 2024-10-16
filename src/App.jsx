@@ -1,17 +1,20 @@
-import "./App.css";
 import React, { Fragment } from "react";
-import TodoList from "./TodoList";
-import AddTodoForm from "./AddTodoForm";
+import TodoList from "./components/TodoList";
+import AddTodoForm from "./components/AddTodoForm";
 import { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, BrowserRouter } from "react-router-dom";
+import styles from './App.module.css'
 
-const url = `https://api.airtable.com/v0/${
-  import.meta.env.VITE_AIRTABLE_BASE_ID
-}/${import.meta.env.VITE_TABLE_NAME}`;
+
 
 function App() {
   const [todoList, setTodoList] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const url = `https://api.airtable.com/v0/${
+    import.meta.env.VITE_AIRTABLE_BASE_ID
+  }/${import.meta.env.VITE_TABLE_NAME}`;
+  console.log('url', url);
 
   async function fetchData() {
     const options = {
@@ -31,55 +34,67 @@ function App() {
       const data = await response.json();
 
       const todos = data.records.map((todo) => {
-        return { title: todo.fields.title, id: todo.id };
-      });
-        { title: todo.fields.title, id: todo.id },
-      ]);
 
-      setTodoList([...todoList, todos]);
+        return { title: todo.fields.title, id: todo.id }
+    });
+
+
+      setTodoList(todos);
       setIsLoading(false);
     } catch (error) {
       console.log(error.message);
     }
   }
-
+console.log("todoListApp", todoList)
   useEffect(() => {
     fetchData();
   }, []);
 
   useEffect(() => {
     if (!isLoading) {
-      localStorage.setItem("savedTodoList", JSON.stringify(todoList));
+      const todoListString = JSON.stringify(todoList);
+      localStorage.setItem("savedTodoList", todoListString);
     }
-  }, [todoList]);
+  }, [todoList, isLoading]);
 
   const addTodo = (newTodo) => {
-    setTodoList([...todoList, newTodo]);
+    setTodoList((prevTodoList) => {
+      return [...prevTodoList, newTodo];
+    });
   };
 
   const onRemoveTodo = (id) => {
-    const newArray = todoList.filter((item) => item.id !== id);
-    setTodoList(newArray);
+    const filteredTodoList = todoList.filter((item) => item.id !== id);
+    setTodoList(filteredTodoList);
   };
 
   return (
-    <Router>
+    <div className={styles.container}>
+    <h1>Todo List</h1>
+    <BrowserRouter>
       <Routes>
-        <Route path="/"></Route>
-        <Route path="/new" element={<h1>New Todo List</h1>}>
-        </Route>
-      </Routes>
-      <div>
-        <h1>Todo List</h1>
+        <Route path="/"
+        element={<>
         <AddTodoForm onAddTodo={addTodo} />
-        {isLoading ? (
+
+        <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo}/>
+        </>}
+        ></Route>
+        <Route path="/new" element={<h1>New Todo List</h1>}></Route>
+     
+      
+        
+        
+
+        {/* {isLoading ? (
           <p>"Loading"</p>
         ) : (
           <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
-        )}
-        <hr />
-      </div>
-    </Router>
+        )} */}
+      
+      </Routes>
+    </BrowserRouter>
+    </div>
   );
 }
 
