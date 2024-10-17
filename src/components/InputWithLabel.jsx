@@ -7,15 +7,10 @@ const InputWithLabel = ({ todoTitle, handleTitleChange, children }) => {
   useEffect(() => {
     inputRef.current.focus();
   });
-console.log('children', children);
-console.log('typeof', typeof(children));
-console.log('todotitle', todoTitle);
 
   return (
     <>
-      <label htmlFor="todoTitle">
-        {children}
-      </label>
+      <label htmlFor="todoTitle">{children}</label>
       <input
         ref={inputRef}
         name="title"
@@ -28,11 +23,9 @@ console.log('todotitle', todoTitle);
 };
 
 InputWithLabel.propTypes = {
-todoTitle: PropTypes.string,
-handleTitleChange: PropTypes.func.isRequired,
-// children: PropTypes.oneOfType([PropTypes.string])
-children: PropTypes.string
-// children: PropTypes.node.isRequired
-}
+  todoTitle: PropTypes.string,
+  handleTitleChange: PropTypes.func.isRequired,
+  children: PropTypes.array,
+};
 
 export default InputWithLabel;

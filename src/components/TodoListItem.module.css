@@ -2,7 +2,6 @@ body {
   display: flex;
   justify-content: center;
 }
-
 .ListItem {
   color: #55585e;
   display: flex;
