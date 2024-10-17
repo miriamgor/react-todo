@@ -18,19 +18,21 @@ function AddTodoForm({ onAddTodo }) {
 
   return (
     <div className={styles.formDiv}>
-    <form onSubmit={handleAddTodo}>
-      <InputWithLabel
-        todoTitle={todoTitle}
-        handleTitleChange={handleTitleChange}
-      >Title: </InputWithLabel>
-      <button className={styles.addTodoButton}>Add</button>
-    </form>
+      <form onSubmit={handleAddTodo}>
+        <InputWithLabel
+          todoTitle={todoTitle}
+          handleTitleChange={handleTitleChange}
+        >
+          Title:{" "}
+        </InputWithLabel>
+        <button className={styles.addTodoButton}>Add</button>
+      </form>
     </div>
   );
 }
 
 AddTodoForm.propTypes = {
- onAddTodo: PropTypes.func
-}
+  onAddTodo: PropTypes.func,
+};
 
 export default AddTodoForm;

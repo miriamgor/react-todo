@@ -11,7 +11,7 @@ import {
 import styles from "./App.module.css";
 
 function App() {
-  const [todoList, setTodoList] = useState([]);
+  const [todoList, setTodoList] = useState();
   const [isLoading, setIsLoading] = useState(true);
 
   const query0 = "?view=Grid%20view";
@@ -21,7 +21,6 @@ function App() {
   const url = `https://api.airtable.com/v0/${
     import.meta.env.VITE_AIRTABLE_BASE_ID
   }/${import.meta.env.VITE_TABLE_NAME}${query0}${query1}${query2}`;
-  console.log("url", url);
 
   async function fetchData() {
     const options = {
@@ -56,15 +55,12 @@ function App() {
       };
 
       let sortedTodos = sortTodos(todos);
-
-      // setTodoList(todos);
       setTodoList(sortedTodos);
       setIsLoading(false);
     } catch (error) {
       console.log(error.message);
     }
   }
-  console.log("todoListApp", todoList);
   useEffect(() => {
     fetchData();
   }, []);
@@ -97,18 +93,15 @@ function App() {
             element={
               <>
                 <AddTodoForm onAddTodo={addTodo} />
-
-                <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
+                {isLoading ? (
+                  <p>"Loading"</p>
+                ) : (
+                  <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
+                )}
               </>
             }
           ></Route>
           <Route path="/new" element={<h1>New Todo List</h1>}></Route>
-
-          {/* {isLoading ? (
-          <p>"Loading"</p>
-        ) : (
-          <TodoList todoList={todoList} onRemoveTodo={onRemoveTodo} />
-        )} */}
         </Routes>
       </BrowserRouter>
     </div>

@@ -2,7 +2,6 @@ import styles from "./TodoListItem.module.css";
 import PropTypes from "prop-types";
 
 const TodoListItem = ({ todo, onRemoveTodo, i }) => {
-  console.log("todo", todo);
   return (
     <div className={styles.listItemDiv}>
       <li className={styles.ListItem} key={i}>
@@ -23,7 +22,7 @@ const TodoListItem = ({ todo, onRemoveTodo, i }) => {
 
 TodoListItem.propTypes = {
   onRemoveTodo: PropTypes.func,
-  i: PropTypes.number
-}
+  i: PropTypes.number,
+};
 
 export default TodoListItem;
